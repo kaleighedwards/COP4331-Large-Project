@@ -31,4 +31,8 @@
   .dropdown-toggle {
     color: #fff !important;
   }
-  
+  .container {
+    width: 800px !important;
+    height: 500px !important;
+    margin: auto;
+}
