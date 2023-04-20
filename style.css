@@ -1,3 +1,5 @@
+/*Makes nav bar responsive*/
+
 @media (max-width: 62em) {
 	.navbar-nav {
 		padding-top: .425rem;
@@ -16,11 +18,12 @@
 	.navbar-nav .nav-item + .nav-item {
 		margin-left: 0;
 	}
-	.dropdown-menu {
+	.dropdown-menu {	
 		position: relative;
 		float: none;
 	}
 }
+/* Navbar colors */
 .my-custom-bg {
     background-color: #252c6a;
   }
@@ -31,8 +34,43 @@
   .dropdown-toggle {
     color: #fff !important;
   }
+
+  /* Container for the carousel on the home page*/
   .container {
     width: 800px !important;
     height: 500px !important;
-    margin: auto;
+    margin: auto !important;
 }
+.table {
+	margin-top: 10%;
+	width: 100% !important;
+	
+}
+.table td {
+	vertical-align: middle !important;
+  }
+  .table thead th {
+	border-bottom: 1px solid #dee2e6 !important;
+  }
+  
+  
+/* Changes the first columns color to blue and text to white*/
+.table thead tr th:first-child {
+	background-color: #252c6a;
+	color: #fff;
+  }
+  .table thead tr th:nth-child(2)  {
+	background-color: #252c6a;
+	color: #fff;
+  }
+  .table thead tr th:nth-child(3)  {
+	background-color: #252c6a;
+	color: #fff;
+  }
+  .table thead tr th:nth-child(4)  {
+	background-color: #252c6a;
+	color: #fff;
+  }
+
+  
+
