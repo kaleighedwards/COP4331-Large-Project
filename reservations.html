@@ -13,37 +13,115 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <!--Navbar start-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark my-custom-bg">
 
-        <a class="navbar-brand" id = "Quest" href="#">Quest</a>
-        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline mx-auto my-2">
-                <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" id = "Reservations" href="#">Reservations<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" id = "Login" href="#">Login<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Settings
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Edit somethin</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+      <a class="navbar-brand" id = "Quest" href="#">Quest</a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="form-inline mx-auto my-2">
+              <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <ul class="navbar-nav">
+              <li class="nav-item active">
+                  <a class="nav-link" id = "Reservations" href="#">Reservations<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" id = "Login" href="#">Login<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" id = "Signup" href="#">Signup<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Settings
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Edit somethin</a>
+                  </div>
+              </li>
+          </ul>
+      </div>
     </nav>
+  <!--Navbar End-->
+
+    <!--Login modal start-->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header border-bottom-0">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+
+              <form class = "form" id = "LoginForm">
+                  <div class="form-title text-center">
+                      <h4>Login</h4>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                <div class="form-group">
+                  <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                </div>
+                <button type="button" class="btn btn-info btn-block btn-round modal-btn">Login</button>
+                <div class="modal-footer d-flex justify-content-center">
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+<!--Login Modal ends-->
+
+<!--Sign up Modal starts-->
+<div class="modal fade" id="SignupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+          <form class = "form" id = "RegisterForm">
+              <div class="form-title text-center">
+                  <h4>Register</h4>
+                </div>
+                <div class="d-flex flex-column text-center">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password1" placeholder="Your password...">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password1" placeholder="Confirm password...">
+            </div>
+            <button type="button" class="btn btn-info btn-block btn-round modal-btn">Register</button>
+            <div class="modal-footer d-flex justify-content-center">
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+
+  </div>
+  <!--Table Start-->
+</div>
 
     <div class="row justify-content-center align">
         <div class="col-8">
@@ -72,6 +150,11 @@
                   <td>Jacob</td>
                   <td>Thornton</td>
                   <td>@fat</td>
+                  <td>
+                    <button id = "delete" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>                        
+                      
+                      
+                  </td> 
                 </tr>
                 <tr>
                   <td>Larry</td>
