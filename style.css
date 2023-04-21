@@ -41,6 +41,7 @@
     height: 500px !important;
     margin: auto !important;
 }
+/* Alignment for reservations table*/
 .table {
 	margin-top: 10%;
 	width: 100% !important;
@@ -49,10 +50,11 @@
 .table td {
 	vertical-align: middle !important;
   }
-  .table thead th {
-	border-bottom: 1px solid #dee2e6 !important;
-  }
-  
+/* Login form stuff */
+.form--hidden {
+    display: none;
+}
+
   
 /* Changes the first columns color to blue and text to white*/
 .table thead tr th:first-child {
@@ -71,6 +73,14 @@
 	background-color: #252c6a;
 	color: #fff;
   }
+  .table thead tr th:nth-child(5)  {
+	background-color: #252c6a;
+	color: #fff;
+  }
+.modal-btn
+{
+	background-color: #252c6a !important;
+	
+}
 
-  
 
