@@ -12,6 +12,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <!--Navbar start-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark my-custom-bg">
 
         <a class="navbar-brand" id = "Quest" href="#">Quest</a>
@@ -32,6 +33,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" id = "Login" href="#">Login<span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" id = "Signup" href="#">Signup<span class="sr-only">(current)</span></a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Settings
@@ -43,6 +47,9 @@
             </ul>
         </div>
     </nav>
+    <!--Navbar End-->
+
+    <!--Carousels Start-->
     <div class="container mt-5">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -140,8 +147,81 @@
             </a>
         </div>
     </div>
-    
+    <!-- Carousels end-->
 
+
+    <!--Login modal start-->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+
+                <form class = "form" id = "LoginForm">
+                    <div class="form-title text-center">
+                        <h4>Login</h4>
+                      </div>
+                      <div class="d-flex flex-column text-center">
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                  </div>
+                  <button type="button" class="btn btn-info btn-block btn-round modal-btn">Login</button>
+                  <div class="modal-footer d-flex justify-content-center">
+                    </div>
+                  </div>
+                </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+<!--Login Modal ends-->
+
+<!--Sign up Modal starts-->
+<div class="modal fade" id="SignupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+            <form class = "form" id = "RegisterForm">
+                <div class="form-title text-center">
+                    <h4>Register</h4>
+                  </div>
+                  <div class="d-flex flex-column text-center">
+              <div class="form-group">
+                <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password1" placeholder="Your password...">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password1" placeholder="Confirm password...">
+              </div>
+              <button type="button" class="btn btn-info btn-block btn-round modal-btn">Register</button>
+              <div class="modal-footer d-flex justify-content-center">
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </body>
 </html>
 <script src="./Js/navbar.js"></script>
+<script src = "./Js/Login.js"></script>
