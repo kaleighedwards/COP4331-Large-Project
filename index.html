@@ -10,6 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
     <!--Navbar start-->
@@ -160,33 +162,33 @@
               </button>
             </div>
             <div class="modal-body">
-
-
+  
+  
                 <form class = "form" id = "LoginForm">
                     <div class="form-title text-center">
                         <h4>Login</h4>
                       </div>
                       <div class="d-flex flex-column text-center">
                   <div class="form-group">
-                    <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+                    <input type="email" class="form-control" id="email1" name = "email" placeholder="Your email address...">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                    <input type="password" class="form-control" id="password1" name = "password" placeholder="Your password...">
                   </div>
-                  <button type="button" class="btn btn-info btn-block btn-round modal-btn">Login</button>
+                  <button type="submit" class="btn btn-info btn-block btn-round modal-btn">Login</button>
                   <div class="modal-footer d-flex justify-content-center">
                     </div>
                   </div>
                 </form>
             </div>
           </div>
-
+  
         </div>
       </div>
-<!--Login Modal ends-->
-
-<!--Sign up Modal starts-->
-<div class="modal fade" id="SignupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--Login Modal ends-->
+  
+  <!--Sign up Modal starts-->
+  <div class="modal fade" id="SignupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header border-bottom-0">
@@ -195,30 +197,30 @@
           </button>
         </div>
         <div class="modal-body">
-
-
+  
+  
             <form class = "form" id = "RegisterForm">
                 <div class="form-title text-center">
                     <h4>Register</h4>
                   </div>
                   <div class="d-flex flex-column text-center">
               <div class="form-group">
-                <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+                <input type="email" class="form-control" id="email1" name="email" placeholder="Your email address...">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                <input type="password" class="form-control" id="password1" name = "signupPass" placeholder="Your password...">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" id="password1" placeholder="Confirm password...">
+                <input type="password" class="form-control" id="password2" name = "confirmPass"placeholder="Confirm password...">
               </div>
-              <button type="button" class="btn btn-info btn-block btn-round modal-btn">Register</button>
+              <button type="submit" id = "register" class="btn btn-info btn-block btn-round modal-btn">Register</button>
               <div class="modal-footer d-flex justify-content-center">
                 </div>
               </div>
             </form>
         </div>
       </div>
-
+  
     </div>
   </div>
 </body>
