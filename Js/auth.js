@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
+require('express');
+require('mongodb');
 
-function authRouter(userCollection, reserveCollection, productCollection) {
+exports.authRouter = function (app, userCollection, reserveCollection, productCollection) {
     // signup endpoint
-    router.post('/signup', async (req, res) => {
+    app.post('/signup', async (req, res) => {
         const { Username, Password, PermLvl } = req.body;
 
         try {
@@ -20,14 +20,17 @@ function authRouter(userCollection, reserveCollection, productCollection) {
                     res.status(500).json({ message: 'Internal server error' });
                 }
             }
-        } catch (err) {
-            console.error(`Error while signing up when connecting to database: ${err.stack}`);
-            res.status(500).json({ message: 'Internal server error' });
+        } catch (e) {
+            var error = `Error while signing up when connecting to database: ${e.toString()}`;
+            res.status(500).json({ 
+                message: 'Internal server error',
+                error: error
+            });
         }
     });
 
     // login endpoint
-    router.post('/signin', async (req, res) => {
+    app.post('/signin', async (req, res) => {
         const { Username, Password } = req.body;
     
         try {
@@ -55,7 +58,7 @@ function authRouter(userCollection, reserveCollection, productCollection) {
     });
 
     // Edit user endpoint
-    router.put('/useredit', async (req, res) => {
+    app.put('/useredit', async (req, res) => {
         const { UserID, Username, Password, PermLvl } = req.body;
     
         // Check if user exists, then update the user
@@ -122,7 +125,7 @@ function authRouter(userCollection, reserveCollection, productCollection) {
 
     // Delete user endpoint
     // Has to check and properly delete all the user's reserves as well, adding back to the stock
-    router.delete('/userdelete', async (req, res) => {
+    app.delete('/userdelete', async (req, res) => {
         const { UserID } = req.body;
 
         try {
@@ -163,8 +166,4 @@ function authRouter(userCollection, reserveCollection, productCollection) {
             res.status(500).json({ message: 'Internal server error' });
         }
     });
-
-    return router;
 }
-
-module.exports = authRouter;

@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
+require('express');
+require('mongodb');
 
-function productRouter(productCollection, userCollection) {
+exports.productRouter = function (app, productCollection, userCollection) {
     // add to stock endpoint
-    router.post('/addstock', async (req, res) => {
+    app.post('/addstock', async (req, res) => {
         const { UserID, ItemID, Amt } = req.body;
 
         try {
@@ -37,7 +37,7 @@ function productRouter(productCollection, userCollection) {
     });
 
     // search product endpoint by name and or category
-    router.get('/search', async (req, res) => {
+    app.get('/search', async (req, res) => {
         const { Name, Cat } = req.query;
 
         const query = {};
@@ -65,7 +65,7 @@ function productRouter(productCollection, userCollection) {
     });
 
     // search product endpoint by serial number
-    router.get('/searchspecific/:SN', async (req, res) => {
+    app.get('/searchspecific/:SN', async (req, res) => {
         const { SN } = req.params;
 
         try {
@@ -83,8 +83,4 @@ function productRouter(productCollection, userCollection) {
             res.status(500).json({ message: 'Internal server error' });
         }
     });
-
-    return router;
 }
-
-module.exports = productRouter;

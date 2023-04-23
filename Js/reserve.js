@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
+require('express');
+require('mongodb');
 
-function reserveRouter(reserveCollection, productCollection) {
+exports.reserveRouter = function (app, reserveCollection, productCollection) {
     // reserve item endpoint
-    router.post('/reserve', async (req, res) => {
+    app.post('/reserve', async (req, res) => {
         const { ItemID, UserID, ItemAmt } = req.body;
 
         // Check if item exists, then checks if there are enough items to reserve, 
@@ -42,7 +42,7 @@ function reserveRouter(reserveCollection, productCollection) {
     });
 
     // edit reserve item endpoint
-    router.put('/reserveedit', async (req, res) => {
+    app.put('/reserveedit', async (req, res) => {
         const { ItemID, UserID, ItemAmt } = req.body;
 
         // Check the current amount of this item reserved by this user,
@@ -124,7 +124,7 @@ function reserveRouter(reserveCollection, productCollection) {
 
     // Search for all reservations for a specific user 
     // (proper request would be /reserve/10, for example)
-    router.get('/reserve/:UserID', async (req, res) => {
+    app.get('/reserve/:UserID', async (req, res) => {
         const { UserID } = req.params;
 
         try {
@@ -141,8 +141,4 @@ function reserveRouter(reserveCollection, productCollection) {
             res.status(500).json({ message: 'Internal server error' });
         }
     });
-    
-    return router;
 }
-
-module.exports = reserveRouter;
