@@ -31,10 +31,13 @@ $(document).ready(function() {
   });
 
   document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('#RegisterForm');
-    form.addEventListener('submit', function(e) {
+    const LoginForm = document.querySelector('#LoginForm')
+    const Signupform = document.querySelector('#RegisterForm');
+
+
+    Signupform.addEventListener('submit', function(e) {
       e.preventDefault();
-      const formData = new FormData(form);
+      const formData = new FormData(Signupform);
       let email = formData.get('email');
       let signupPass = formData.get('signupPass');
       let confirmPass = formData.get('confirmPass');
@@ -42,12 +45,34 @@ $(document).ready(function() {
       console.log("Password1: ", signupPass);
       console.log("Password2: ", confirmPass);
 
-      const axios = require('axios');
-      
-      axios.post('http://questelectronics.store/signup', {
-        Username: 'email',
-        Password: 'signupPass',
+
+      axios.post('http://questelectronics.store/js/auth.js/signup', {
+        Username: email,
+        Password: signupPass,
         PermLvl: 1
+    })
+    .then(response => {
+        console.log(response.data);
+    })
+    .catch(error => {
+        console.error(error.response.data);
+    });
+    });
+
+
+    LoginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(LoginForm);
+      let email = formData.get('email');
+      let password = formData.get('password');
+      console.log("Email: ", email);
+      console.log("Password1: ", password);
+
+
+
+      axios.post('http://questelectronics.store/js/auth.js/signin', {
+        Username: email,
+        Password: password,
     })
     .then(response => {
         console.log(response.data);
