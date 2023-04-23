@@ -46,10 +46,11 @@ $(document).ready(function() {
       console.log("Password2: ", confirmPass);
 
 
-      axios.post('http://questelectronics.store/js/auth.js/signup', {
+      const cors = require('cors');
+      axios.post('http://localhost:5500/signup', {
         Username: email,
         Password: signupPass,
-        PermLvl: 1
+        PermLvl: 2
     })
     .then(response => {
         console.log(response.data);
@@ -70,7 +71,7 @@ $(document).ready(function() {
 
 
 
-      axios.post('http://questelectronics.store/js/auth.js/signin', {
+      axios.post('http://localhost:5500/signin', {
         Username: email,
         Password: password,
     })
