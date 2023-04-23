@@ -6,26 +6,31 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
     app.post('/signup', async (req, res) => {
         const { Username, Password, PermLvl } = req.body;
 
-        try {
-            const user = await userCollection.findOne({ Username });
-
-            if (user) {
-                res.status(409).json({ message: 'Username already exists' });
-            } else {
-                const result = await userCollection.insertOne({ Username, Password, PermLvl });
-                
-                if( result.insertedCount === 1 ) {
-                    res.status(201).json({ message: 'User created with permission level ' + PermLvl });
+        if ( Username && Password ) {
+            try {
+                const user = await userCollection.findOne({ Username });
+    
+                if (user) {
+                    res.status(409).json({ message: 'Username already exists' });
                 } else {
-                    res.status(500).json({ message: 'Internal server error' });
+                    const result = await userCollection.insertOne({ Username, Password, PermLvl });
+                    
+                    if( result.insertedCount === 1 ) {
+                        res.status(201).json({ message: 'User created with permission level ' + PermLvl });
+                    } else {
+                        res.status(500).json({ message: 'Internal server error' });
+                    }
                 }
+            } catch (e) {
+                var error = `Error while signing up when connecting to database: ${e.toString()}`;
+                res.status(500).json({ 
+                    message: 'Internal server error',
+                    error: error
+                });
             }
-        } catch (e) {
-            var error = `Error while signing up when connecting to database: ${e.toString()}`;
-            res.status(500).json({ 
-                message: 'Internal server error',
-                error: error
-            });
+        }
+        else {
+            res.status(400).json({ message: 'Username and password are required' });
         }
     });
 
