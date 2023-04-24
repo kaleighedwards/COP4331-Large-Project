@@ -45,25 +45,22 @@ $(document).ready(function() {
       const formData = new FormData(Signupform);
       let email = formData.get('email');
       let signupPass = formData.get('signupPass');
-      let confirmPass = formData.get('confirmPass');
-      console.log("Email: ", email);
-      console.log("Password1: ", signupPass);
-      console.log("Password2: ", confirmPass);
-
-
-      axios.post('http://127.0.0.1:5500/Large%20project/Js/auth', {
+      //let confirmPass = formData.get('confirmPass');
+      let PermLvl = 2;
+      let data = {
         Username: email,
         Password: signupPass,
-        PermLvl: 2,
-        
+        PermLvl: 2
+      }
+      console.log(data);
 
-    },{withCreditentials: true})
-    .then(response => {
-        console.log(response.data);
-    })
-    .catch(error => {
-        console.error(error.response.data);
-    });
+      axios.post('localhost:5500/Js/signup', data)
+      .then(response => {
+          console.log(response.data);
+        })
+      .catch(error => { 
+          console.error(error.response.data);
+        });
     });
 
 
@@ -76,16 +73,17 @@ $(document).ready(function() {
       console.log("Password1: ", password);
 
 
-
-      axios.post('http://localhost:5500/signin', {
+      let data = {
         Username: email,
-        Password: password,
-    })
+        Password: password
+      }
+      
+      axios.post('127.0.0.1:5500/Js/signin', {data})
     .then(response => {
         console.log(response.data);
     })
     .catch(error => {
-        console.error(error.response.data);
+        console.error(error.toString());
     });
     });
 
