@@ -59,7 +59,7 @@ $(document).ready(function() {
           console.log(response.data);
         })
       .catch(error => { 
-          console.error(error.response.data);
+          console.log(response.data);
         });
     });
 
@@ -83,7 +83,7 @@ $(document).ready(function() {
         console.log(response.data);
     })
     .catch(error => {
-        console.error(error.toString());
+        console.log(error.toString());
     });
     });
 
