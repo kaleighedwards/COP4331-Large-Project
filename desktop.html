@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 
 </head>
 <body>
@@ -49,11 +51,10 @@
               </li>
           </ul>
       </div>
-   </nav>
+    </nav>
   <!--Navbar End-->
-
-     <!--Login modal start-->
-     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--Login modal start-->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header border-bottom-0">
@@ -123,47 +124,55 @@
 
   </div>
 </div>
-<!--Table Starts-->
-    <div class="row justify-content-center align">
-        <div class="col-8">
-          <div class="table-responsive">
-            <table class="table" >
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Desktops</th>
-                  <th scope = "col">Name</th> 
-                  <th scope="col">Price</th>
-                  <th scope = "col">In stock</th>
-                  <th scope="col" >Add</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style = "width: 30%"><img src="image1.jpg" width = "200px"></td>
-                  <td>Something that is really really long</td>
-                  <td>$295</td>
-                  <td></td>
-                  <td>
-                    <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
-                  </td>                
-                </tr>
-                <tr>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    
+<div class = "table">
+    <!--Table Starts-->
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th class="th-sm">Desktops
+          </th>
+          <th class="th-sm">Name
+          </th>
+          <th class="th-sm">In stock
+          </th>
+          <th class="th-sm">Reserve
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style = "width: 30%"><img src="image1.jpg" width = "200px"></td>
+          <td>System Architect</td>
+          <td>Edinburgh</td>
+          <td>
+            <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+          </td>
+
+        </tr>
+        <tr>
+          <td><img src="image1.jpg" width = "400px  "></td>
+          <td>Accountant</td>
+          <td>Tokyo</td>
+          <td>
+            <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+          </td>
+
+        </tr>
+        <tr>
+          <td style = "width: 30%"><img src="image1.jpg" width = "200px"></td>
+          <td>Junior Technical Author</td>
+          <td>San Francisco</td>
+          <td>
+            <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+          </td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
+  <!--Table Ends-->
 </body>
 </html>
-<script src="./Js/navbar.js"></script>
+<script src=./Js/navbar.js></script>
 <script src = ./Js/Deletetable.js></script>
+<script src = Js/SortTable.js></script>
