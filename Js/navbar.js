@@ -4,6 +4,11 @@ const Login = document.getElementById("Login");
 const Signup = document.getElementById("Signup")
 const RegisterForm = document.getElementById("RegisterForm");
 
+
+
+
+
+//buttons to other pages
 Reservations.addEventListener("click", () => {
     window.location.href = "reservations.html";
 });
@@ -23,64 +28,66 @@ $(document).ready(function() {
       $("#loginModal").modal('show');
     });
   });
-
+//shows signup modal
   $(document).ready(function() {
     $("#Signup").click(function() {
       $("#SignupModal").modal('show');
     });
   });
 
+  //function for API calls
+  function callEndpoint(endpoint, data) {
+    axios.post(endpoint, data)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+  }
+  
+
   document.addEventListener('DOMContentLoaded', function() {
     const LoginForm = document.querySelector('#LoginForm')
     const Signupform = document.querySelector('#RegisterForm');
 
-
+    //call to signup API
     Signupform.addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(Signupform);
       let email = formData.get('email');
       let signupPass = formData.get('signupPass');
       let confirmPass = formData.get('confirmPass');
-      console.log("Email: ", email);
-      console.log("Password1: ", signupPass);
-      console.log("Password2: ", confirmPass);
-
-
-      const cors = require('cors');
-      axios.post('http://localhost:5500/signup', {
-        Username: email,
-        Password: signupPass,
-        PermLvl: 2
-    })
-    .then(response => {
-        console.log(response.data);
-    })
-    .catch(error => {
-        console.error(error.response.data);
-    });
+      //checks if passwords entered are the same
+      if(signupPass == confirmPass)
+      {
+        let data = {
+          Username: email,
+          Password: signupPass,
+          PermLvl: 2
+        }
+        console.log(data);
+        callEndpoint('localhost:5500/Js/signup', data)
+      }
+      else 
+      {
+        console.log("Passwords dont match");
+      }
     });
 
-
+    //call to login API
     LoginForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(LoginForm);
       let email = formData.get('email');
       let password = formData.get('password');
-      console.log("Email: ", email);
-      console.log("Password1: ", password);
-
-
-
-      axios.post('http://localhost:5500/signin', {
+      let data = {
         Username: email,
-        Password: password,
-    })
-    .then(response => {
-        console.log(response.data);
-    })
-    .catch(error => {
-        console.error(error.response.data);
-    });
+        Password: password
+      }
+      console.log(data);
+      callEndpoint('localhost:5500/Js/signin', data);
+
     });
 
   });
@@ -89,6 +96,5 @@ $(document).ready(function() {
   
 
   
-
 
 
