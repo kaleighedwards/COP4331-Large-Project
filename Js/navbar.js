@@ -40,6 +40,7 @@ $(document).ready(function() {
     axios.post(endpoint, data)
       .then(response => {
         console.log(response.data);
+        return response.data;
       })
       .catch(error => {
         console.log(error.response.data);
@@ -87,6 +88,10 @@ $(document).ready(function() {
       }
       console.log(data);
       callEndpoint('localhost:5500/Js/signin', data);
+      const userId = response.id;
+      localStorage.setItem("userId", userId);
+      document.cookie = "userId=" + userId;
+
 
     });
 
