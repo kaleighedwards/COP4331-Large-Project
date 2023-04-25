@@ -1,5 +1,4 @@
-/*Makes nav bar responsive*/
-
+/* Mobile compatibility */
 @media (max-width: 62em) {
 	.navbar-nav {
 		padding-top: .425rem;
@@ -37,16 +36,34 @@
 
   /* Container for the carousel on the home page*/
   .container {
-    width: 800px !important;
+    width: 100% !important;
+	max-width: 800px !important;
     height: 500px !important;
     margin: auto !important;
+	
 }
+@media (max-width: 767px) {
+  .container {
+    height: auto;
+  }
+}
+
 /* Alignment for reservations table*/
 .table {
-	margin-top: 10%;
+	margin-top: 5% !important;
 	width: 100% !important;
 	
 }
+/* Employee table buttons and input fields */
+.add{
+	background-color: #252c6a !important;
+	color: white !important;
+}
+
+.employee-input{
+	width: 7%;
+}
+
 .table td {
 	vertical-align: middle !important;
   }
