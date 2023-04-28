@@ -18,7 +18,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
                     const result = await userCollection.insertOne({ Username, Password, PermLvl });
                     res.status(201).json({ 
                         message: `User created with permission level ${PermLvl>1?'Customer':'Employee'} and _id: ${result.insertedId}`,
-                        _id: result.insertedId
+                        UserID: result.insertedId
                     });
                 }
             } catch (e) {
@@ -40,7 +40,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
     
             if (user) {
                 res.status(200).json({ 
-                    _id: user._id,
+                    UserID: user._id,
                     message: 'Login successful',
                     PermLvl: user.PermLvl === 2 ? 'Customer' : "Employee"
                 });
