@@ -25,16 +25,17 @@ function getCookie(cname) {
     var table = $('#dtBasicExample').DataTable();
   
     for (var i = 0; i < data.length; i++){
+      var randomIndex = Math.floor(Math.random() * 9) + 1; // generate a random number between 1 and 9
       var row = `<tr>
-                    <td>${data[i].image}</td>
-                    <td>${data[i].Name}</td>
+      <td><img src="/images/Laptop${randomIndex}.png" alt="${data[i].Name}" style="width: 300px;"></td>
+      <td>${data[i].Name}</td>
                     <td>${data[i].Amt}</td>
                     <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>
-                    </tr>`;
+                </tr>`;
       table.row.add($(row)).draw();
     }
     makeTableSortable();
-  }
+}
 
 $(document).ready(function(){
     axios.get('https://questelectronics.store/api/search', "?Cat=Laptop")
