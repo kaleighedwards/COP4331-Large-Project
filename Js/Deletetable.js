@@ -69,8 +69,8 @@ $(document).ready(function(){
     $('table').on('click', '.btn-danger', function(){
         let name = $(this).closest('tr').children('td').eq(1).text();
         let data = {
-            ItemID: name,
-            _Id: _Id,
+            Name: name,
+            UserID: _Id,
             ItemAmt: ItemAmt
         }
         console.log(data);
