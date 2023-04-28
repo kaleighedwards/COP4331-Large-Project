@@ -20,9 +20,8 @@ function getCookie(cname) {
     var imageIndex = 0; // initialize the image index counter to 0
   
     for (var i = 0; i < data.length; i++){
-      var imageSrc = imageList[imageIndex]; // get the image source for the current row
       var row = `<tr>
-                    <td><img src="${imageSrc}" alt="${data[i].Name}" style="max-width: 300px;"></td>
+                    <td></td>
                     <td>${data[i].ItemName}</td>
                     <td>${data[i].ItemAmt}</td>
                     <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>
