@@ -4,28 +4,27 @@ require('mongodb');
 exports.reserveRouter = function (app, reserveCollection, productCollection) {
     // reserve item endpoint
     app.post('/api/reserve', async (req, res, next) => {
-        const { ItemID, UserID, ItemAmt } = req.body;
+        const { Name, UserID, ItemAmt } = req.body;
 
         // Check if item exists, then checks if there are enough items to reserve, 
         // then reserves the item, subtracting the amount reserved from the total amount of items
         try {
-            const item = await productCollection.findOne({ ItemID });
+            const item = await productCollection.findOne({ Name });
 
             if (item) {
                 if (item.Amt >= ItemAmt) {
-                    const result = await reserveCollection.insertOne({ ItemID, UserID, ItemAmt });
+                    const result = await reserveCollection.findOne({ UserID, Name });
 
-                    if (result.insertedCount === 1) {
-                        const result2 = await productCollection.updateOne({ ItemID }, { $set: { Amt: item.Amt - ItemAmt } });
-
-                        if (result2.modifiedCount === 1) {
-                            res.status(201).json({ message: 'Item reserved' });
-                        } else {
-                            res.status(500).json({ message: 'Internal server error' });
-                        }
-                    } else {
-                        res.status(500).json({ message: 'Internal server error' });
+                    if (result) {
+                        const result2 = await reserveCollection.updateOne({ UserID, Name }, { $inc: { ItemAmt } });
                     }
+                    else {
+                        const result2 = await reserveCollection.insertOne({ UserID, Name, ItemAmt });
+                    }
+
+                    const updatedAmt = item.Amt - ItemAmt;
+                    const result3 = await productCollection.updateOne({ Name }, { $set: { Amt: updatedAmt } });
+                    res.status(201).json({ message: `${Name} has been reserved. ${updatedAmt} left in stock` });
                 } else {
                     res.status(409).json({ 
                         message: 'Not enough items to reserve, there are only ' + item.Amt + ' items left'
@@ -138,6 +137,37 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
         }
         catch (err) {
             console.error(`Error while searching for reservations when connecting to database: ${err.stack}`);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    });
+
+    // "Checkout" Delete all reserves for a specific user
+    app.delete('/api/reserve/:UserID', async (req, res, next) => {
+        const { UserID } = req.params;
+
+        try {
+            const result = await reserveCollection.find({ UserID }).toArray();
+
+            if (result.length > 0) {
+                let totalPrice = 0;
+                for (let i = 0; i < result.length; i++) {
+                    let item = await productCollection.findOne({ ItemID: result[i].Name });
+                    totalPrice += item.Price * result[i].ItemAmt;
+                }
+                const deleteResult = await reserveCollection.deleteMany({ UserID });
+
+                if (result.deletedCount > 0) {
+                    res.status(200).json({ 
+                        message: `${result.deletedCount} Items have been purchased.`,
+                        totalPrice: `$${totalPrice}`
+                    });
+                } 
+            } else {
+                res.status(404).json({ message: 'No reservations found for this user' });
+            }
+        }
+        catch (err) {
+            console.error(`Error while deleting reservations when connecting to database: ${err.stack}`);
             res.status(500).json({ message: 'Internal server error' });
         }
     });
