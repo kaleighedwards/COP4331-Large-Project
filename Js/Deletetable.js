@@ -15,24 +15,7 @@ function getCookie(cname) {
     return "";
   }
   //function that takes the users reservations and builds a table
-  function RenamedTable(data){
-    var table = $('#dtBasicExample').DataTable();
-    var imageList = ['/images/Desktop1.png', '/images/Desktop2.png', '/images/Desktop3.png', '/images/Desktop4.png', '/images/Desktop5.png', '/images/Desktop6.png', '/images/Desktop7.png', '/images/Desktop8.png', '/images/Desktop9.png']; // create an array of image file names
-    var imageIndex = 0; // initialize the image index counter to 0
-  
-    for (var i = 0; i < data.length; i++){
-      var imageSrc = imageList[imageIndex]; // get the image source for the current row
-      var row = `<tr>
-                    <td><img src="${imageSrc}" alt="${data[i].Name}" style="max-width: 300px;"></td>
-                    <td>${data[i].Name}</td>
-                    <td>${data[i].Amt}</td>
-                    <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>
-                </tr>`;
-      table.row.add($(row)).draw();
-      imageIndex = (imageIndex + 1) % imageList.length; // increment the image index and cycle back to the start of the array if necessary
-    }
-    makeTableSortable();
-}
+
 
   //gets the users reservation table
 $(document).ready(function(){
@@ -45,7 +28,7 @@ $(document).ready(function(){
     pickup.addEventListener("click", e => {
       e.preventDefault();
       console.log("I am being pressed");
-      axios.delete('https://questelectronics.store/api/reserve/' + _Id, data)
+      axios.delete('https://questelectronics.store/api/reserve/' + Username, data)
       .then(response => {
         console.log(response.data);
         RenamedTable(response.data);
