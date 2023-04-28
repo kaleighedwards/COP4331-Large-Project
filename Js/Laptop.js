@@ -21,7 +21,7 @@ function getCookie(cname) {
     });
   }
   
-  function buildTable(data){
+  function laptopTable(data){
     var table = $('#dtBasicExample').DataTable();
     var imageList = ['/images/Laptop1.png', '/images/Laptop2.png', '/images/Laptop3.png', '/images/Laptop4.png', '/images/Laptop5.png', '/images/Laptop6.png', '/images/Laptop7.png', '/images/Laptop8.png', '/images/Laptop9.png']; // create an array of image file names
     var imageIndex = 0; // initialize the image index counter to 0
@@ -44,7 +44,7 @@ $(document).ready(function(){
     axios.get('https://questelectronics.store/api/search', "?Cat=Laptop")
     .then(response => {
       console.log(response.data);
-      buildTable(response.data);
+      laptopTable(response.data);
     })
     .catch(error => {
       console.log(error?.response?.data);

@@ -25,7 +25,7 @@
     }
     return "";
   }
-  function buildTable(data){
+  function buildTable2(data){
     var table = $('#dtBasicExample').DataTable();
     var imageIndex = 0; // initialize the image index counter to 0
   

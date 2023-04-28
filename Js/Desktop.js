@@ -21,7 +21,7 @@ function getCookie(cname) {
     });
   }
   
-  function buildTable(data){
+  function DesktopTable(data){
     var table = $('#dtBasicExample').DataTable();
     var imageList = ['/images/Desktop1.png', '/images/Desktop2.png', '/images/Desktop3.png', '/images/Desktop4.png', '/images/Desktop5.png', '/images/Desktop6.png', '/images/Desktop7.png', '/images/Desktop8.png', '/images/Desktop9.png']; // create an array of image file names
     var imageIndex = 0; // initialize the image index counter to 0
@@ -44,7 +44,7 @@ $(document).ready(function(){
     axios.get('https://questelectronics.store/api/search', "?Cat=Desktop")
     .then(response => {
       console.log(response.data);
-      buildTable(response.data);
+      DesktopTable(response.data);
     })
     .catch(error => {
       console.log(error?.response?.data);

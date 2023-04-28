@@ -21,7 +21,7 @@ function getCookie(cname) {
     });
   }
   
-  function buildTable(data){
+  function PeripheralTable(data){
     var table = $('#dtBasicExample').DataTable();
     var imageList = ['/images/Peripherals1.png', '/images/Peripherals2.png', '/images/Peripherals3.png', '/images/Peripherals4.png', '/images/Peripherals5.png', '/images/Peripherals6.png', '/images/Peripherals7.png', '/images/Peripherals8.png', '/images/Peripherals9.png']; // create an array of image file names
     var imageIndex = 0; // initialize the image index counter to 0
@@ -44,7 +44,7 @@ $(document).ready(function(){
     axios.get('https://questelectronics.store/api/search', "?Cat=Peripheral")
     .then(response => {
       console.log(response.data);
-      buildTable(response.data);
+      PeripheralTable(response.data);
     })
     .catch(error => {
       console.log(error?.response?.data);
