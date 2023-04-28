@@ -119,7 +119,10 @@ $(document).ready(function() {
       .then(response => {
        
         console.log(response.data);
+        const Username = email;
         const _Id = response._Id;
+        document.cookie(Username);
+        document.cookie(_Id);
         localStorage.setItem("userId", _Id);
       })
       .catch(error => {
