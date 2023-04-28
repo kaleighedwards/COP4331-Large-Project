@@ -9,7 +9,7 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
         // Check if item exists, then checks if there are enough items to reserve, 
         // then reserves the item, subtracting the amount reserved from the total amount of items
         try {
-            const item = await productCollection.findOne({ ItemName });
+            const item = await productCollection.findOne({ Name: ItemName });
 
             if (item) {
                 if (item.Amt >= ItemAmt) {
@@ -23,8 +23,8 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
                     }
 
                     const updatedAmt = item.Amt - ItemAmt;
-                    const result3 = await productCollection.updateOne({ ItemName }, { $set: { Amt: updatedAmt } });
-                    res.status(201).json({ message: `${Name} has been reserved. ${updatedAmt} left in stock` });
+                    const result3 = await productCollection.updateOne({ Name: ItemName }, { $set: { Amt: updatedAmt } });
+                    res.status(201).json({ message: `${ItemName} has been reserved. ${updatedAmt} left in stock` });
                 } else {
                     res.status(409).json({ 
                         message: 'Not enough items to reserve, there are only ' + item.Amt + ' items left'
