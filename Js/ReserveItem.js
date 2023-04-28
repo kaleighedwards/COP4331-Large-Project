@@ -52,9 +52,9 @@
       console.log(table_amt);
       //data for API call
       let data = {
-        ItemID: name,
+        Name: name,
         ItemAmt: amt,
-        _Id: _Id
+        UserID: _Id
       }
       console.log(data);
       axios.post('https://questelectronics.store/api/reserve', data)
