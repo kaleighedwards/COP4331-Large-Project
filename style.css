@@ -35,12 +35,19 @@
   }
 
   /* Container for the carousel on the home page*/
+  .carousel
+  {
+	margin-top: 100px;
+	justify-content: space-between;
+  }
   .container {
     width: 100% !important;
 	max-width: 800px !important;
-    height: 500px !important;
-    margin: auto !important;
-	
+    height: 500px !important;	
+}
+#myCarousel2
+{
+	margin-top: -50px;
 }
 @media (max-width: 767px) {
   .container {
@@ -99,5 +106,4 @@
 	background-color: #252c6a !important;
 	
 }
-
 
