@@ -146,6 +146,7 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
         }
     });
 
+    /*
     // "Checkout" Delete all reserves for a specific user
     app.delete('/api/reserve/:Username', async (req, res, next) => {
         const { Username } = req.params;
@@ -156,7 +157,7 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
             if (result.length > 0) {
                 let totalPrice = 0;
                 for (let i = 0; i < result.length; i++) {
-                    let item = await productCollection.findOne({ Name: result[i].Name });
+                    let item = await productCollection.findOne({ Name: result[i].Isername });
                     totalPrice += item.Price * result[i].ItemAmt;
                 }
                 const deleteResult = await reserveCollection.deleteMany({ Username });
@@ -174,4 +175,5 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
             res.status(500).json({ message: 'Internal server error' });
         }
     });
+    */
 }
