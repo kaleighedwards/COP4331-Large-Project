@@ -4,26 +4,26 @@ require('mongodb');
 exports.reserveRouter = function (app, reserveCollection, productCollection) {
     // reserve item endpoint
     app.post('/api/reserve', async (req, res, next) => {
-        const { Name, UserID, ItemAmt } = req.body;
+        const { ItemName, Username, ItemAmt } = req.body;
 
         // Check if item exists, then checks if there are enough items to reserve, 
         // then reserves the item, subtracting the amount reserved from the total amount of items
         try {
-            const item = await productCollection.findOne({ Name });
+            const item = await productCollection.findOne({ ItemName });
 
             if (item) {
                 if (item.Amt >= ItemAmt) {
-                    const result = await reserveCollection.findOne({ UserID, Name });
+                    const result = await reserveCollection.findOne({ Username, ItemName });
 
                     if (result) {
-                        const result2 = await reserveCollection.updateOne({ UserID, Name }, { $inc: { ItemAmt } });
+                        const result2 = await reserveCollection.updateOne({ Username, ItemName }, { $inc: { ItemAmt } });
                     }
                     else {
-                        const result2 = await reserveCollection.insertOne({ UserID, Name, ItemAmt });
+                        const result2 = await reserveCollection.insertOne({ Username, ItemName, ItemAmt });
                     }
 
                     const updatedAmt = item.Amt - ItemAmt;
-                    const result3 = await productCollection.updateOne({ Name }, { $set: { Amt: updatedAmt } });
+                    const result3 = await productCollection.updateOne({ ItemName }, { $set: { Amt: updatedAmt } });
                     res.status(201).json({ message: `${Name} has been reserved. ${updatedAmt} left in stock` });
                 } else {
                     res.status(409).json({ 
@@ -43,23 +43,24 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
         }
     });
 
+    
     // edit reserve item endpoint
     app.put('/api/reserveedit', async (req, res, next) => {
-        const { ItemID, UserID, ItemAmt } = req.body;
+        const { ItemName, Username, ItemAmt } = req.body;
 
         // Check the current amount of this item reserved by this user,
         // then depending on whether the new item amount is greater or less than the current amount,
         // either add or subtract the difference from the total amount of items
         try {
-            const reservation = await reserveCollection.findOne({ ItemID, UserID });
+            const reservation = await reserveCollection.findOne({ ItemName, Username });
 
             if (reservation) {
                 // If we are deleting the reservation
                 if (ItemAmt === 0) {
-                    const result = await reserveCollection.deleteOne({ ItemID, UserID });
+                    const result = await reserveCollection.deleteOne({ ItemName, Username });
 
                     if (result.deletedCount === 1) {
-                        const result2 = await productCollection.updateOne({ ItemID }, { $set: { Amt: item.Amt + reservation.ItemAmt } });
+                        const result2 = await productCollection.updateOne({ ItemName }, { $set: { Amt: item.Amt + reservation.ItemAmt } });
 
                         if (result2.modifiedCount === 1) {
                             res.status(200).json({ message: 'Item reservation removed. ' + reservation.ItemAmt + ' items returned to stock' });
@@ -72,14 +73,14 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
                 }
                 // If we are adding to the amount reserved
                 else if (ItemAmt > reservation.ItemAmt) {
-                    const item = await productCollection.findOne({ ItemID });
+                    const item = await productCollection.findOne({ ItemName });
 
                     if (item) {
                         if (item.Amt >= ItemAmt - reservation.ItemAmt) {
-                            const result = await reserveCollection.updateOne({ ItemID, UserID }, { $set: { ItemAmt } });
+                            const result = await reserveCollection.updateOne({ ItemName, Username }, { $set: { ItemAmt } });
 
                             if (result.modifiedCount === 1) {
-                                const result2 = await productCollection.updateOne({ ItemID }, { $set: { Amt: item.Amt - (ItemAmt - reservation.ItemAmt) } });
+                                const result2 = await productCollection.updateOne({ ItemName }, { $set: { Amt: item.Amt - (ItemAmt - reservation.ItemAmt) } });
 
                                 if (result2.modifiedCount === 1) {
                                     res.status(200).json({ message: 'Item reservation updated. ' + (ItemAmt - reservation.ItemAmt) + ' items reserved' });
@@ -100,10 +101,10 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
                 }
                 // If we are subtracting from the amount reserved but not removing the reservation
                 else if (ItemAmt < reservation.ItemAmt) {
-                    const result = await reserveCollection.updateOne({ ItemID, UserID }, { $set: { ItemAmt } });
+                    const result = await reserveCollection.updateOne({ ItemName, Username }, { $set: { ItemAmt } });
 
                     if (result.modifiedCount === 1) {
-                        const result2 = await productCollection.updateOne({ ItemID }, { $set: { Amt: item.Amt + (reservation.ItemAmt - ItemAmt) } });
+                        const result2 = await productCollection.updateOne({ ItemName }, { $set: { Amt: item.Amt + (reservation.ItemAmt - ItemAmt) } });
 
                         if (result2.modifiedCount === 1) {
                             res.status(200).json({ message: 'Item reservation updated. ' + (reservation.ItemAmt - ItemAmt) + ' items returned to stock' });
@@ -123,14 +124,15 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
             res.status(500).json({ message: 'Internal server error' });
         }
     });
+    
 
     // Search for all reservations for a specific user 
     // (proper request would be /reserve/10, for example)
-    app.get('/api/reserve/:UserID', async (req, res, next) => {
-        const { UserID } = req.params;
+    app.get('/api/reserve/:Username', async (req, res, next) => {
+        const { Username } = req.params;
 
         try {
-            const result = await reserveCollection.find({ UserID }).toArray();
+            const result = await reserveCollection.find({ Username }).toArray();
 
             if (result.length > 0) {
                 res.status(200).json(result);
@@ -145,11 +147,11 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
     });
 
     // "Checkout" Delete all reserves for a specific user
-    app.delete('/api/reserve/:UserID', async (req, res, next) => {
-        const { UserID } = req.params;
+    app.delete('/api/reserve/:Username', async (req, res, next) => {
+        const { Username } = req.params;
 
         try {
-            const result = await reserveCollection.find({ UserID }).toArray();
+            const result = await reserveCollection.find({ Username }).toArray();
             
             if (result.length > 0) {
                 let totalPrice = 0;
@@ -157,7 +159,7 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
                     let item = await productCollection.findOne({ Name: result[i].Name });
                     totalPrice += item.Price * result[i].ItemAmt;
                 }
-                const deleteResult = await reserveCollection.deleteMany({ UserID });
+                const deleteResult = await reserveCollection.deleteMany({ Username });
 
                 res.status(200).json({ 
                     message: `${deleteResult.deletedCount} item(s) have been purchased.`,
