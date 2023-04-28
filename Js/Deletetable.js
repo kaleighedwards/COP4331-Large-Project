@@ -39,7 +39,7 @@ $(document).ready(function(){
     axios.post('https://questelectronics.store/api/reserve/:_Id', data)
     .then(response => {
       console.log(response.data);
-      buildTable(reponse.data);
+      buildTable(response.data);
     })
     .catch(error => {
       console.log(error?.response?.data);

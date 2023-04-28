@@ -122,158 +122,92 @@
 
   </div>
 </div>
-    <!--Table Starts-->
-    <div class="row justify-content-center align">
-        <div class="col-8">
-          <div class="table-responsive">
-            <table class="table" >
-              <thead class="thead-light">
-                <tr>
-                  <th scope = "col">Name</th> 
-                  <th scope = "col"># In stock</th>
-                  <th scope="col" >Add</th>
-                </tr>
-              </thead>
-              <tbody>
-               <!-- <tr>
-                  <td><td>ASUS TUF Gaming H1</td>/td>
-                  <td>295</td>
-                  <td>
-                    <input type="text"class = "employee-input" id="input-field" name="input-field">
-                    <button class = "btn add btn-sm" type="submit">Submit</button>
-                  </td>            
-                </tr>
-                <tr>
-                  <td>ASUS TUF Gaming K7</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>ASUS TUF Gaming M3 Gen II</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>HP 220</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>HP 450</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>HP Poly Voyager 4320</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo Legion H600</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo Legion K300</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo Legion M200</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>ASUS ROG Strix SCAR 18</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>ASUS ROG Zephyrus Duo 16</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>ASUS Zenbook Pro 16X</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>HP Dragonfly PRO</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>HP Omen 16</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>HP Victus</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo Legion Pro 7i</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo ThinkPad T16</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo Yoga 7i</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>ASUS D5 SFF</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>ASUS S500MC</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>ASUS S641MD</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>HP ENVY TE01 2265t SFF</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>HP ENVY TE03 SFF</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo Legion Tower 5i</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo Legion Tower 7i</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <td>Lenovo ThinkStation P360</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+<div class = "table">
+  <!--Table Starts-->
+  <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead>
+      <!--<tr>
+      
+        <th class="th-sm">Name
+        </th>
+        <th class="th-sm">In stock
+        </th>
+        <th class="th-sm">Add Stock
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id = "name">ASUS ROG Strix SCAR 18</td>
+        <td>5</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+
+      </tr>
+      <tr>
+        <td id = "name">ASUS ROG Zephyrus Duo 16</td>
+        <td>4</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+
+      </tr>
+      <tr>
+        <td id = "name">ASUS Zenbook Pro 16X</td>
+        <td>1</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+      </tr>
+      <tr>
+        <td id = "name">HP Dragonfly PRO</td>
+        <td>1</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+      </tr>
+      <tr>
+        <td id = "name">HP Omen 16</td>
+        <td>1</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+      </tr>
+      <tr>
+        <td id = "name">HP Victus</td>
+        <td>13</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+      </tr>
+      <tr>
+        <td id = "name">Lenovo Legion Pro 7i</td>
+        <td>12</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+      </tr>
+      <tr>
+        <td id = "name">Lenovo ThinkPad T16</td>
+        <td>15</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+      </tr>
+      <tr>
+        <td id = "name">Lenovo Yoga 7i</td>
+        <td>10</td>
+        <td>
+          <button class="btn btn-success btn-sm" id = "successBtn"><i class="fas fa-check"></i></button>
+        </td>
+      </tr>
+    -->
+     
+    </tbody>
+  </table>
+</div>
+<!--Table Ends-->
     
 </body>
 </html>
