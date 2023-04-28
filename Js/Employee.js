@@ -53,8 +53,8 @@ $(document).ready(function(){
         
         
         let data = {
-            _Id: _Id,
-            itemID: name,
+            UserID: _Id,
+            Name: name,
             Amt: stock
         }
         console.log(data);
