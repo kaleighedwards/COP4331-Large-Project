@@ -59,6 +59,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
         }
     });
 
+    /*
     // Edit user endpoint
     app.put('/api/useredit', async (req, res, next) => {
         const { _id, Username, Password, PermLvl } = req.body;
@@ -184,4 +185,5 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
             res.status(500).json({ message: 'Internal server error' });
         }
     });
+    */
 }
