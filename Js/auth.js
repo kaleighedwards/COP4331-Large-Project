@@ -61,13 +61,18 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
 
     // Edit user endpoint
     app.put('/api/useredit', async (req, res, next) => {
-        const { UserID, Username, Password, PermLvl } = req.body;
-    
+        const { _id, Username, Password, PermLvl } = req.body;
+        let err = false;
         // Check if user exists, then update the user
         try {
-            const user = await userCollection.findOne({ UserID });
+            const user = await userCollection.findOne({ _id });
 
             if (user) {
+                let messages = [
+                    usermessage = "No changes made to username",
+                    passmessage = "No changes made to password",
+                    permmessage = "No changes made to permission level"
+                ]
                 // Check what is being updated 
                 // DEAR FRONT END:
                 // If you are not changing any of these fields, then dont pass them in the request body
@@ -77,46 +82,57 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
                     const user2 = await userCollection.findOne({ Username });
 
                     if (user2) {
-                        res.status(409).json({ message: 'New username already exists' });
+                        err = true;
+                        messages.usermessage = 'New username already exists';
                     }
                     else {
-                        const result = await userCollection.updateOne({ UserID }, { $set: { Username } });
+                        const result = await userCollection.updateOne({ _id }, { $set: { Username } });
 
                         if (result.modifiedCount === 1) {
-                            res.status(200).json({ message: 'Username updated from ' + user.Username + ' to ' + Username + ' successfully' });
+                            messages.usermessage = 'Username updated from ' + user.Username + ' to ' + Username + ' successfully';
                         } else {
-                            res.status(500).json({ message: 'Internal server error' });
+                            err = true;
+                            messages.usermessage = 'Internal server error';
                         }
                     }
                 }
 
                 if (Password) {
-                    const result = await userCollection.updateOne({ UserID }, { $set: { Password } });
+                    const result = await userCollection.updateOne({ _id }, { $set: { Password } });
 
                     if (result.modifiedCount === 1) {
-                        res.status(200).json({ message: 'Password updated successfully' });
+                        messages.passmessage = 'Password updated successfully';
                     } else {
-                        res.status(500).json({ message: 'Internal server error' });
+                        err = true;
+                        messages.passmessage = 'Internal server error';
                     }
                 }
 
                 if (PermLvl) {
-                    const result = await userCollection.updateOne({ UserID }, { $set: { PermLvl } });
+                    const result = await userCollection.updateOne({ _id }, { $set: { PermLvl } });
 
                     if (result.modifiedCount === 1) {
                         // If Perm level is decreased, say the user has been elevated
                         if (PermLvl < user.PermLvl) {
-                            res.status(200).json({ message: 'User has been elevated to permission level ' + PermLvl });
+                            messages.permmessage = 'User has been elevated to permission level ' + PermLvl;
                         } else {
-                            res.status(200).json({ message: 'User has been demoted to permission level ' + PermLvl });
+                            messages.permmessage = 'User has been demoted to permission level ' + PermLvl;
                         }
                     } else {
-                        res.status(500).json({ message: 'Internal server error' });
+                        err = true;
+                        messages.permmessage = 'Internal server error';
                     }
+                }
+
+                if (err) {
+                    res.status(500).json(messages);
+                }
+                else {
+                    res.status(200).json(messages);
                 }
             }
             else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ message: '_id not found' });
             }
         }
         catch (err) {

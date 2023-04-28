@@ -4,25 +4,21 @@ require('mongodb');
 exports.productRouter = function (app, productCollection, userCollection) {
     // add to stock endpoint
     app.post('/api/addstock', async (req, res, next) => {
-        const { UserID, ItemID, Amt } = req.body;
+        const { UserID, Name, Amt } = req.body;
 
         try {
             //check if user PermLvl is admin (PermLvl < 2)
-            const user = await userCollection.findOne({ UserID });
+            const user = await userCollection.findOne({ _id: UserID });
 
-            if (user.PermLvl < 2) {
+            if (user.PermLvl === 1) {
                 //check if product exists
-                const item = await productCollection.findOne({ ItemID });
+                const item = await productCollection.findOne({ Name });
 
                 if (item) {
                     //update product
-                    const result = await productCollection.updateOne({ ItemID }, { $inc: { Amt } });
+                    const result = await productCollection.updateOne({ Name }, { $inc: { Amt } });
 
-                    if (result.modifiedCount === 1) {
-                        res.status(201).json({ message: Amt + ' stock has been added to ' + item.Name + ' successfully' });
-                    } else {
-                        res.status(500).json({ message: 'Internal server error' });
-                    }
+                    res.status(201).json({ message: Amt + ' stock has been added to ' + item.Name + ' successfully' });
                 } else {
                     res.status(404).json({ message: 'Item not found' });
                 }
@@ -40,7 +36,7 @@ exports.productRouter = function (app, productCollection, userCollection) {
     app.get('/api/search', async (req, res, next) => {
         const { Name, Cat } = req.query;
 
-        const query = {};
+        let query = {};
         if (Name) {
             query.Name = { $regex: `.*${Name}.*`, $options: 'i' };
         }
@@ -69,7 +65,7 @@ exports.productRouter = function (app, productCollection, userCollection) {
         const { SN } = req.params;
 
         try {
-            const result = await productCollection.findOne({ SN })
+            const result = await productCollection.findOne({ SN });
 
             if (result) {
                 res.status(200).json(result);
@@ -81,6 +77,28 @@ exports.productRouter = function (app, productCollection, userCollection) {
         catch (err) {
             console.error(`Error while searching for items when connecting to database: ${err.stack}`);
             res.status(500).json({ message: 'Internal server error' });
+        }
+    });
+
+    // add products endpoint
+    app.post('/api/addproduct', async (req, res, next) => {
+        const { Name, Cat, Amt, Loc, Price, SN } = req.body;
+
+        const product = await productCollection.findOne({ Name });
+        
+        if (product) {
+            res.status(409).json({ message: 'Item already exists' });
+        }
+        else {
+            try {
+                const result = await productCollection.insertOne({ Name, Cat, Amt, Loc, Price, SN });
+
+                res.status(200).json({ message: `Item: ${Name} added successfully` });
+            }
+            catch (err) {
+                console.error(`Error while adding item when connecting to database: ${err.stack}`);
+                res.status(500).json({ message: 'Internal server error' });
+            }
         }
     });
 }
