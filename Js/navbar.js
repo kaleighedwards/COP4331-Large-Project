@@ -67,7 +67,7 @@ $(document).ready(function() {
           PermLvl: 2
         }
         console.log(data);
-        callEndpoint('https://questelectronics.store/signup', data);
+        callEndpoint('https://questelectronics.store/api/signup', data);
       }
       else 
       {
@@ -86,7 +86,7 @@ $(document).ready(function() {
         Password: password
       }
       console.log(data);
-      callEndpoint('https://questelectronics.store/signin', data);
+      callEndpoint('https://questelectronics.store/api/signin', data);
 
     });
 
