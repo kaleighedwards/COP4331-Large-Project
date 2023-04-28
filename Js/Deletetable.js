@@ -21,7 +21,7 @@ function getCookie(cname) {
     for (var i = 0; i < data.length; i++){
         var row = `<tr>
                         <td>${data[i].image}</td>
-                        <td>${data[i].name}</td>
+                        <td>${data[i].Name}</td>
                         <td>${data[i].instock}</td>
                         <td><button id = "delete" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
                   </tr>`
@@ -32,16 +32,30 @@ function getCookie(cname) {
 }
   const _Id = getCookie("_Id");
   let data = {
-    _Id: _Id
+    UserID: _Id
   }
   //gets the users reservation table
 $(document).ready(function(){
-  let pickup = document.getElementById("pickedUp");
-  pickup.addEventListener("click", e => {
-    e.preventDefault();
-    console.log("I am being pressed");
-  });
-    axios.post('https://questelectronics.store/api/reserve/:_Id', data)
+  try{
+    let pickup = document.getElementById("pickedUp");
+    pickup.addEventListener("click", e => {
+      e.preventDefault();
+      console.log("I am being pressed");
+      axios.delete('https://questelectronics.store/api/reserve/:UserID', data)
+      .then(response => {
+        console.log(response.data);
+        buildTable(response.data);
+      })
+      .catch(error => {
+        console.log(error?.response?.data);
+      });
+    });
+  }
+  catch{
+    console.log("me no exist")
+  }
+
+    axios.get('https://questelectronics.store/api/reserve/:UserID', data)
     .then(response => {
       console.log(response.data);
       buildTable(response.data);
@@ -61,7 +75,7 @@ $(document).ready(function(){
         }
         console.log(data);
         $(this).closest('tr').remove();
-        axios.post('https://questelectronics.store/api/reserveedit', data)
+        axios.put('https://questelectronics.store/api/reserveedit', data)
         .then(response => {
           console.log(response.data);
         })

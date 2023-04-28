@@ -20,6 +20,7 @@ function buildTable(data){
 
     for (var i = 0; i < data.length; i++){
         var row = `<tr>
+                        <td></td>
                         <td>${data[i].Name}</td>
                         <td>${data[i].Amt}</td>
                         <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>                  
@@ -29,13 +30,9 @@ function buildTable(data){
 
     }
 }
-
-
+/*
 $(document).ready(function(){
-    let _Id = getCookie("_Id");
-
-    //displays everything in the table for the employee
-    axios.get('https://questelectronics.store/api/search', "")
+    axios.get('https://questelectronics.store/api/search', "?Cat=Desktop")
     .then(response => {
       console.log(response.data);
       buildTable(response.data);
@@ -43,31 +40,6 @@ $(document).ready(function(){
     .catch(error => {
       console.log(error?.response?.data);
     });
-
-    $('table').on('click', '.btn-success', function(){
-        let stock = $(this).closest('tr').children('td').eq(1).text();
-        let name = $(this).closest('tr').children('td').eq(0).text();
-        console.log(name);
-        stock = parseInt(stock) + 1;
-        $(this).closest('tr').children('td').eq(1).text(stock); //sets the table to table_amt
-        
-        
-        let data = {
-            _Id: _Id,
-            itemID: name,
-            Amt: stock
-        }
-        console.log(data);
-        axios.post('https://questelectronics.store/api/addstock', data) //data = _Id + itemID +  stock
-        .then(response => {
-          console.log(response.data);
-          buildTable(response.data);
-        })
-        .catch(error => {
-          console.log(error?.response?.data);
-        });
-    });
-
-
-
+    
 });
+*/

@@ -26,11 +26,13 @@ function clearInputError(inputElement) {
 
 
 //buttons to other pages
-Reservations.addEventListener("click", () => {
+Reservations.addEventListener("click", e => {
+    e.preventDefault();
     window.location.href = "reservations.html";
 });
 
-Home.addEventListener("click", () => {
+Home.addEventListener("click", e => {
+    e.preventDefault();
     window.location.href = "index.html";
 });
 
@@ -85,20 +87,16 @@ $(document).ready(function() {
         let data = {
           Username: email,
           Password: signupPass,
-          PermLvl: 2
+          PermLvl: "2"
         }
         console.log(data);
         axios.post('https://questelectronics.store/api/signup', data)
         .then(response => {
-          console.log(response.data);
-          let parsedData = JSON.parse(response.responseText);
-          alert(parsedData.message);
-          console.log(parsedData.message);
+          console.log(response?.data);
         })
         .catch(error => {
           console.log(error?.response?.message);
         });
-        alert(response.message);
       }
       else 
       {
@@ -119,16 +117,14 @@ $(document).ready(function() {
       console.log(data);
       axios.post('https://questelectronics.store/api/signin', data)
       .then(response => {
-        let parsedData = JSON.parse(response.responseText);
-        alert(parsedData);
-        console.log(parsedData.data);
-        const _Id = parsedData._Id;
-        localStorage.setItem("userId", userId);
+       
+        console.log(response.data);
+        const _Id = response._Id;
+        localStorage.setItem("userId", _Id);
       })
       .catch(error => {
         console.log(error?.response?.data);
       });
-      alert(response.message);
     });
 
   });
