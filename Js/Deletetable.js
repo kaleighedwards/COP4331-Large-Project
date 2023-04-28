@@ -41,7 +41,7 @@ $(document).ready(function(){
     pickup.addEventListener("click", e => {
       e.preventDefault();
       console.log("I am being pressed");
-      axios.delete('https://questelectronics.store/api/reserve/:UserID', data)
+      axios.delete('https://questelectronics.store/api/reserve/' + _Id, data)
       .then(response => {
         console.log(response.data);
         buildTable(response.data);
@@ -55,7 +55,7 @@ $(document).ready(function(){
     console.log("me no exist")
   }
 
-    axios.get('https://questelectronics.store/api/reserve/:UserID', data)
+    axios.get('https://questelectronics.store/api/reserve/' + _Id, data)
     .then(response => {
       console.log(response.data);
       buildTable(response.data);

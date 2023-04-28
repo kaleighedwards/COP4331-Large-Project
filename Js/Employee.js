@@ -33,6 +33,7 @@ function buildTable(data){
 
 $(document).ready(function(){
     let _Id = getCookie("_Id");
+    let Username = getCookie("Username")
 
     //displays everything in the table for the employee
     axios.get('https://questelectronics.store/api/search', "")
@@ -53,7 +54,7 @@ $(document).ready(function(){
         
         
         let data = {
-            UserID: _Id,
+            Username: Username,
             Name: name,
             Amt: stock
         }
