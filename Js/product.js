@@ -3,7 +3,7 @@ require('mongodb');
 
 exports.productRouter = function (app, productCollection, userCollection) {
     // add to stock endpoint
-    app.post('/addstock', async (req, res) => {
+    app.post('/addstock', async (req, res, next) => {
         const { UserID, ItemID, Amt } = req.body;
 
         try {
@@ -37,7 +37,7 @@ exports.productRouter = function (app, productCollection, userCollection) {
     });
 
     // search product endpoint by name and or category
-    app.get('/search', async (req, res) => {
+    app.get('/search', async (req, res, next) => {
         const { Name, Cat } = req.query;
 
         const query = {};
@@ -65,7 +65,7 @@ exports.productRouter = function (app, productCollection, userCollection) {
     });
 
     // search product endpoint by serial number
-    app.get('/searchspecific/:SN', async (req, res) => {
+    app.get('/searchspecific/:SN', async (req, res, next) => {
         const { SN } = req.params;
 
         try {

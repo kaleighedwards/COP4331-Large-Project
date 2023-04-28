@@ -3,7 +3,7 @@ require('mongodb');
 
 exports.reserveRouter = function (app, reserveCollection, productCollection) {
     // reserve item endpoint
-    app.post('/reserve', async (req, res) => {
+    app.post('/reserve', async (req, res, next) => {
         const { ItemID, UserID, ItemAmt } = req.body;
 
         // Check if item exists, then checks if there are enough items to reserve, 
@@ -42,7 +42,7 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
     });
 
     // edit reserve item endpoint
-    app.put('/reserveedit', async (req, res) => {
+    app.put('/reserveedit', async (req, res, next) => {
         const { ItemID, UserID, ItemAmt } = req.body;
 
         // Check the current amount of this item reserved by this user,
@@ -124,7 +124,7 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
 
     // Search for all reservations for a specific user 
     // (proper request would be /reserve/10, for example)
-    app.get('/reserve/:UserID', async (req, res) => {
+    app.get('/reserve/:UserID', async (req, res, next) => {
         const { UserID } = req.params;
 
         try {

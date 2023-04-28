@@ -3,10 +3,12 @@ require('mongodb');
 
 exports.authRouter = function (app, userCollection, reserveCollection, productCollection) {
     // signup endpoint
-    app.post('/signup', async (req, res) => {
+    app.post('/signup', async (req, res, next) => {
         const { Username, Password, PermLvl } = req.body;
 
-        if ( Username && Password ) {
+        if ( !Username || !Password ) {
+            res.status(400).json({ message: 'Username and password are required' });
+        } else {
             try {
                 const user = await userCollection.findOne({ Username });
     
@@ -16,7 +18,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
                     const result = await userCollection.insertOne({ Username, Password, PermLvl });
                     
                     if( result.insertedCount === 1 ) {
-                        res.status(201).json({ message: 'User created with permission level ' + PermLvl });
+                        res.status(201).json({ message: 'User created with permission level ' + PermLvl>1?'Customer':'Admin' });
                     } else {
                         res.status(500).json({ message: 'Internal server error' });
                     }
@@ -28,14 +30,11 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
                     error: error
                 });
             }
-        }
-        else {
-            res.status(400).json({ message: 'Username and password are required' });
-        }
+        }      
     });
 
     // login endpoint
-    app.post('/signin', async (req, res) => {
+    app.post('/signin', async (req, res, next) => {
         const { Username, Password } = req.body;
     
         try {
@@ -63,7 +62,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
     });
 
     // Edit user endpoint
-    app.put('/useredit', async (req, res) => {
+    app.put('/useredit', async (req, res, next) => {
         const { UserID, Username, Password, PermLvl } = req.body;
     
         // Check if user exists, then update the user
