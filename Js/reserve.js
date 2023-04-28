@@ -36,7 +36,10 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
         }
         catch (err) {
             console.error(`Error while reserving item when connecting to database: ${err.stack}`);
-            res.status(500).json({ message: 'Internal server error' });
+            res.status(500).json({ 
+                message: 'Internal server error',
+                error: err.stack 
+            });
         }
     });
 
