@@ -16,19 +16,21 @@ function getCookie(cname) {
   }
   //function that takes the users reservations and builds a table
   function buildTable(data){
-    var table = document.getElementById('myTable')
-
+    var table = $('#dtBasicExample').DataTable();
+    var imageIndex = 0; // initialize the image index counter to 0
+  
     for (var i = 0; i < data.length; i++){
-        var row = `<tr>
-                        <td>${data[i].image}</td>
-                        <td>${data[i].Name}</td>
-                        <td>${data[i].instock}</td>
-                        <td><button id = "delete" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
-                  </tr>`
-        table.innerHTML += row
-
-
+      var imageSrc = imageList[imageIndex]; // get the image source for the current row
+      var row = `<tr>
+                    <td><img src="${imageSrc}" alt="${data[i].Name}" style="max-width: 300px;"></td>
+                    <td>${data[i].ItemName}</td>
+                    <td>${data[i].ItemAmt}</td>
+                    <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>
+                </tr>`;
+      table.row.add($(row)).draw();
+      imageIndex = (imageIndex + 1) % imageList.length; // increment the image index and cycle back to the start of the array if necessary
     }
+    makeTableSortable();
 }
 
   //gets the users reservation table

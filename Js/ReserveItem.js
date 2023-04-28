@@ -77,8 +77,6 @@
       axios.post('https://questelectronics.store/api/reserve', data)
       .then(response => {
         console.log(response.data);
-        buildTable(response.data);
-
       })
       .catch(error => {
         console.log(error?.response?.data);
