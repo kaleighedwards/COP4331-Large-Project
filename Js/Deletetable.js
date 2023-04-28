@@ -49,7 +49,7 @@ $(document).ready(function(){
         let data = {
             ItemName: name,
             Username: "Ben10@alien.com",
-            ItemAmt: ItemAmt
+            ItemAmt: 1
         }
         console.log(data);
         $(this).closest('tr').remove();
