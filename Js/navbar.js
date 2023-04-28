@@ -45,6 +45,8 @@ $(document).ready(function() {
         console.log(error?.response?.data);
       });
   }
+  //sets form messages
+  
   
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -67,7 +69,14 @@ $(document).ready(function() {
           PermLvl: 2
         }
         console.log(data);
-        callEndpoint('https://questelectronics.store/api/signup', data);
+        axios.post('https://questelectronics.store/api/signup', data)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error?.response?.data);
+        });
+        alert(response.message);
       }
       else 
       {
@@ -86,8 +95,14 @@ $(document).ready(function() {
         Password: password
       }
       console.log(data);
-      callEndpoint('https://questelectronics.store/api/signin', data);
-
+      axios.post('https://questelectronics.store/api/signin', data)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error?.response?.data);
+      });
+      alert(response.message);
     });
 
   });
