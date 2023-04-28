@@ -1,4 +1,3 @@
-//cookie decoder
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -14,29 +13,28 @@ function getCookie(cname) {
     }
     return "";
   }
-  //function that takes the users reservations and builds a table
-  function buildTable(data){
+
+
+function buildTable(data){
     var table = document.getElementById('myTable')
 
     for (var i = 0; i < data.length; i++){
         var row = `<tr>
-                        <td>${data[i].image}</td>
                         <td>${data[i].name}</td>
-                        <td>${data[i].instock}</td>
-                        <td><button id = "delete" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
-                  </tr>`
+                        <td>${data[i].Amt}</td>
+                        <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>                  </tr>`
         table.innerHTML += row
 
 
     }
 }
-  const _Id = getCookie("_Id");
-  let data = {
-    _Id: _Id
-  }
-  //gets the users reservation table
+
+
 $(document).ready(function(){
-    axios.post('https://questelectronics.store/api/reserve/:_Id', data)
+    let _Id = getCookie("_Id");
+
+    //displays everything in the table for the employee
+    axios.post('https://questelectronics.store/api/search', "")
     .then(response => {
       console.log(response.data);
       buildTable(response.data);
@@ -44,24 +42,31 @@ $(document).ready(function(){
     .catch(error => {
       console.log(error?.response?.data);
     });
-    
-    let ItemAmt = 1;
-    //removes an item
-    $('table').on('click', '.btn-danger', function(){
-        let name = $(this).closest('tr').children('td').eq(1).text();
+
+    $('table').on('click', '.btn-success', function(){
+        let stock = $(this).closest('tr').children('td').eq(1).text();
+        let name = $(this).closest('tr').children('td').eq(0).text();
+        console.log(name);
+        stock = parseInt(stock) + 1;
+        $(this).closest('tr').children('td').eq(1).text(stock); //sets the table to table_amt
+        
+        
         let data = {
-            ItemID: name,
             _Id: _Id,
-            ItemAmt: ItemAmt
+            itemID: name,
+            Amt: stock
         }
         console.log(data);
-        $(this).closest('tr').remove();
-        axios.post('https://questelectronics.store/api/reserveedit', data)
+        axios.post('https://questelectronics.store/api/addstock', data) //data = _Id + itemID +  stock
         .then(response => {
           console.log(response.data);
+          buildTable(response.data);
         })
         .catch(error => {
           console.log(error?.response?.data);
         });
     });
+
+
+
 });
