@@ -23,16 +23,19 @@ function getCookie(cname) {
   
   function buildTable(data){
     var table = $('#dtBasicExample').DataTable();
+    var imageList = ['/images/Desktop1.png', '/images/Desktop2.png', '/images/Desktop3.png', '/images/Desktop4.png', '/images/Desktop5.png', '/images/Desktop6.png', '/images/Desktop7.png', '/images/Desktop8.png', '/images/Desktop9.png']; // create an array of image file names
+    var imageIndex = 0; // initialize the image index counter to 0
   
     for (var i = 0; i < data.length; i++){
-      var randomIndex = Math.floor(Math.random() * 9) + 1; // generate a random number between 1 and 9
+      var imageSrc = imageList[imageIndex]; // get the image source for the current row
       var row = `<tr>
-      <td><img src="/images/Desktop${randomIndex}.png" alt="${data[i].Name}" style="width: 300px;"></td>
-      <td>${data[i].Name}</td>
+                    <td><img src="${imageSrc}" alt="${data[i].Name}" style="max-width: 300px;"></td>
+                    <td>${data[i].Name}</td>
                     <td>${data[i].Amt}</td>
                     <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>
                 </tr>`;
       table.row.add($(row)).draw();
+      imageIndex = (imageIndex + 1) % imageList.length; // increment the image index and cycle back to the start of the array if necessary
     }
     makeTableSortable();
 }
