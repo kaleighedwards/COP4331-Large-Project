@@ -13,24 +13,29 @@ function getCookie(cname) {
     }
     return "";
   }
-
-
-function buildTable(data){
-    var table = document.getElementById('dtBasicExample')
-
+  function makeTableSortable() {
+    $('#myTable').DataTable({
+      "paging": true,
+      "ordering": true,
+      "info": true
+    });
+  }
+  
+  function buildTable(data){
+    var table = $('#dtBasicExample').DataTable();
+  
     for (var i = 0; i < data.length; i++){
-        var row = `<tr>
-                        <td></td>
-                        <td>${data[i].Name}</td>
-                        <td>${data[i].Amt}</td>
-                        <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>                  
-                  </tr>`
-        table.innerHTML += row
-
-
+      var row = `<tr>
+                    <td>${data[i].image}</td>
+                    <td>${data[i].Name}</td>
+                    <td>${data[i].Amt}</td>
+                    <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>
+                    </tr>`;
+      table.row.add($(row)).draw();
     }
-}
-/*
+    makeTableSortable();
+  }
+
 $(document).ready(function(){
     axios.get('https://questelectronics.store/api/search', "?Cat=Desktop")
     .then(response => {
@@ -42,4 +47,4 @@ $(document).ready(function(){
     });
     
 });
-*/
+
