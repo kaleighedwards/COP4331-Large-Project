@@ -150,21 +150,19 @@ exports.reserveRouter = function (app, reserveCollection, productCollection) {
 
         try {
             const result = await reserveCollection.find({ UserID }).toArray();
-
+            
             if (result.length > 0) {
                 let totalPrice = 0;
                 for (let i = 0; i < result.length; i++) {
-                    let item = await productCollection.findOne({ ItemID: result[i].Name });
+                    let item = await productCollection.findOne({ Name: result[i].Name });
                     totalPrice += item.Price * result[i].ItemAmt;
                 }
                 const deleteResult = await reserveCollection.deleteMany({ UserID });
 
-                if (result.deletedCount > 0) {
-                    res.status(200).json({ 
-                        message: `${result.deletedCount} Items have been purchased.`,
-                        totalPrice: `$${totalPrice}`
-                    });
-                } 
+                res.status(200).json({ 
+                    message: `${deleteResult.deletedCount} item(s) have been purchased.`,
+                    totalPrice: `$${totalPrice}`
+                });
             } else {
                 res.status(404).json({ message: 'No reservations found for this user' });
             }
