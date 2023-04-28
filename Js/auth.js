@@ -44,7 +44,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
                 res.status(200).json({ 
                     id: user.UserID,
                     message: 'Login successful',
-                    PermLvl: user.PermLvl
+                    PermLvl: user.PermLvl === 2 ? 'Customer' : "Employee"
                 });
             } else {
                 const userExists = await userCollection.findOne({ Username });
