@@ -37,7 +37,7 @@ function getCookie(cname) {
   }
 
 $(document).ready(function(){
-    axios.get('https://questelectronics.store/api/search', "?Cat=Desktop")
+    axios.get('https://questelectronics.store/api/search', "?Cat=Laptop")
     .then(response => {
       console.log(response.data);
       buildTable(response.data);
