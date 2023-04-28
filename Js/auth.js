@@ -3,7 +3,7 @@ require('mongodb');
 
 exports.authRouter = function (app, userCollection, reserveCollection, productCollection) {
     // signup endpoint
-    app.post('/signup', async (req, res, next) => {
+    app.post('/api/signup', async (req, res, next) => {
         const { Username, Password, PermLvl } = req.body;
 
         if ( !Username || !Password ) {
@@ -34,7 +34,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
     });
 
     // login endpoint
-    app.post('/signin', async (req, res, next) => {
+    app.post('/api/signin', async (req, res, next) => {
         const { Username, Password } = req.body;
     
         try {
@@ -62,7 +62,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
     });
 
     // Edit user endpoint
-    app.put('/useredit', async (req, res, next) => {
+    app.put('/api/useredit', async (req, res, next) => {
         const { UserID, Username, Password, PermLvl } = req.body;
     
         // Check if user exists, then update the user
@@ -129,7 +129,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
 
     // Delete user endpoint
     // Has to check and properly delete all the user's reserves as well, adding back to the stock
-    app.delete('/userdelete', async (req, res) => {
+    app.delete('/api/userdelete', async (req, res) => {
         const { UserID } = req.body;
 
         try {

@@ -7,11 +7,6 @@ exports.setApp = function ( app, client )
     const userCollection = db.collection("User");
     const reserveCollection = db.collection("Reserve");
     const productCollection = db.collection("Product");
-
-    // for funsies
-    app.get('/api', (req, res) => {
-        res.send('Hello World!');
-    });
     
     const auth = require('./auth');
     auth.authRouter(app, userCollection, reserveCollection, productCollection);
