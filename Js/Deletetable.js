@@ -36,6 +36,11 @@ function getCookie(cname) {
   }
   //gets the users reservation table
 $(document).ready(function(){
+  let pickup = document.getElementById("pickedUp");
+  pickup.addEventListener("click", e => {
+    e.preventDefault();
+    console.log("I am being pressed");
+  });
     axios.post('https://questelectronics.store/api/reserve/:_Id', data)
     .then(response => {
       console.log(response.data);
