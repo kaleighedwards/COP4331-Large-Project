@@ -23,6 +23,11 @@
 	}
 }
 /* Navbar colors */
+.check
+{
+	background-color: #252c6a !important;
+	color: #fff !important;
+}
 .my-custom-bg {
     background-color: #252c6a;
   }
