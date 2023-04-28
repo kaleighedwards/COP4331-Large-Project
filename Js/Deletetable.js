@@ -16,18 +16,17 @@ function getCookie(cname) {
   }
   //function that takes the users reservations and builds a table
   function buildTable(data){
-    var table = $('#dtBasicExample').DataTable();
-    var imageIndex = 0; // initialize the image index counter to 0
-  
+    var table = $('#dtBasicExample').DataTable();  
     for (var i = 0; i < data.length; i++){
       var row = `<tr>
                     <td></td>
                     <td>${data[i].ItemName}</td>
                     <td>${data[i].ItemAmt}</td>
-                    <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>
-                </tr>`;
+                    <td>
+                    <button id = "delete" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>    
+                  </td>
+                </tr>`
       table.row.add($(row)).draw();
-      imageIndex = (imageIndex + 1) % imageList.length; // increment the image index and cycle back to the start of the array if necessary
     }
     makeTableSortable();
 }
@@ -56,7 +55,7 @@ $(document).ready(function(){
   catch{
     console.log("me no exist")
   }
-
+  let ItemAmt = 1;
     axios.get('https://questelectronics.store/api/reserve/' + "Ben10@alien.com", "")
     .then(response => {
       console.log(response.data);
@@ -66,7 +65,7 @@ $(document).ready(function(){
       console.log(error?.response?.data);
     });
     
-    let ItemAmt = 1;
+    
     //removes an item
     $('table').on('click', '.btn-danger', function(){
         let name = $(this).closest('tr').children('td').eq(1).text();
