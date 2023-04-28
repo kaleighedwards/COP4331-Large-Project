@@ -23,7 +23,7 @@ function getCookie(cname) {
   
   function buildTable(data){
     var table = $('#dtBasicExample').DataTable();
-    var imageList = ['/images/peripherals1.png', '/images/peripherals2.png', '/images/peripherals3.png', '/images/peripherals4.png', '/images/peripherals5.png', '/images/peripherals6.png', '/images/peripherals7.png', '/images/peripherals8.png', '/images/peripherals9.png']; // create an array of image file names
+    var imageList = ['/images/Peripherals1.png', '/images/Peripherals2.png', '/images/Peripherals3.png', '/images/Peripherals4.png', '/images/Peripherals5.png', '/images/Peripherals6.png', '/images/Peripherals7.png', '/images/Peripherals8.png', '/images/Peripherals9.png']; // create an array of image file names
     var imageIndex = 0; // initialize the image index counter to 0
   
     for (var i = 0; i < data.length; i++){
