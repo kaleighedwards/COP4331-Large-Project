@@ -16,12 +16,10 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
                     res.status(409).json({ message: 'Username already exists' });
                 } else {
                     const result = await userCollection.insertOne({ Username, Password, PermLvl });
-                    
-                    if( result.insertedCount === 1 ) {
-                        res.status(201).json({ message: 'User created with permission level ' + PermLvl>1?'Customer':'Admin' });
-                    } else {
-                        res.status(500).json({ message: 'Internal server error' });
-                    }
+                    res.status(201).json({ 
+                        message: `User created with permission level ${PermLvl>1?'Customer':'Employee'} and _id: ${result.insertedId}`,
+                        _id: result.insertedId
+                    });
                 }
             } catch (e) {
                 var error = `Error while signing up when connecting to database: ${e.toString()}`;
