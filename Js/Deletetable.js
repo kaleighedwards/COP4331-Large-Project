@@ -41,15 +41,6 @@ $(document).ready(function(){
   catch{
     console.log("me no exist")
   }
-  let ItemAmt = 1;
-    axios.get('https://questelectronics.store/api/reserve/' + "Ben10@alien.com", "")
-    .then(response => {
-      console.log(response.data);
-      RenamedTable(response.data);
-    })
-    .catch(error => {
-      console.log(error?.response?.data);
-    });
     
     
     //removes an item
