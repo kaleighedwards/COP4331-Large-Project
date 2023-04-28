@@ -25,6 +25,23 @@
     }
     return "";
   }
+  function buildTable(data){
+    var table = $('#dtBasicExample').DataTable();
+    var imageIndex = 0; // initialize the image index counter to 0
+  
+    for (var i = 0; i < data.length; i++){
+      var imageSrc = imageList[imageIndex]; // get the image source for the current row
+      var row = `<tr>
+                    <td><img src="${imageSrc}" alt="${data[i].Name}" style="max-width: 300px;"></td>
+                    <td>${data[i].ItemName}</td>
+                    <td>${data[i].ItemAmt}</td>
+                    <td><button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button></td>
+                </tr>`;
+      table.row.add($(row)).draw();
+      imageIndex = (imageIndex + 1) % imageList.length; // increment the image index and cycle back to the start of the array if necessary
+    }
+    makeTableSortable();
+}
 
   $(document).ready(function(){
     //Gets the Name of the item  and the amt
@@ -52,14 +69,16 @@
       console.log(table_amt);
       //data for API call
       let data = {
-        Name: name,
+        ItemName: name,
         ItemAmt: amt,
-        UserID: "644b527ae0face3cf923ea8a"
+        Username: "Ben10@alien.com"
       }
       console.log(data);
       axios.post('https://questelectronics.store/api/reserve', data)
       .then(response => {
         console.log(response.data);
+        buildTable(response.data);
+
       })
       .catch(error => {
         console.log(error?.response?.data);

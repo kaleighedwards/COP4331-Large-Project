@@ -87,7 +87,7 @@ $(document).ready(function() {
         let data = {
           Username: email,
           Password: signupPass,
-          PermLvl: "2"
+          PermLvl: 2
         }
         console.log(data);
         axios.post('https://questelectronics.store/api/signup', data)

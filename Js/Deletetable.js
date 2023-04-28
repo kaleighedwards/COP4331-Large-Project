@@ -35,7 +35,7 @@ function getCookie(cname) {
 $(document).ready(function(){
   const _Id = getCookie("_Id");
   let data = {
-    UserID: _Id
+    Username: "Ben10@alien.com"
   }
   try{
     let pickup = document.getElementById("pickedUp");
@@ -56,7 +56,7 @@ $(document).ready(function(){
     console.log("me no exist")
   }
 
-    axios.get('https://questelectronics.store/api/reserve/' + _Id, "")
+    axios.get('https://questelectronics.store/api/reserve/' + "Ben10@alien.com", "")
     .then(response => {
       console.log(response.data);
       buildTable(response.data);
@@ -70,8 +70,8 @@ $(document).ready(function(){
     $('table').on('click', '.btn-danger', function(){
         let name = $(this).closest('tr').children('td').eq(1).text();
         let data = {
-            Name: name,
-            UserID: _Id,
+            ItemName: name,
+            Username: "Ben10@alien.com",
             ItemAmt: ItemAmt
         }
         console.log(data);
