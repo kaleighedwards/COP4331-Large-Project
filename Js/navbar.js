@@ -4,6 +4,23 @@ const Login = document.getElementById("Login");
 const Signup = document.getElementById("Signup")
 const RegisterForm = document.getElementById("RegisterForm");
 
+function setFormMessage(formElement, type, message) {
+  const messageElement = formElement.querySelector(".form__message");
+
+  messageElement.textContent = message;
+  messageElement.classList.remove("form__message--success", "form__message--error");
+  messageElement.classList.add(`form__message--${type}`);
+}
+
+function setInputError(inputElement, message) {
+  inputElement.classList.add("form__input--error");
+  inputElement.parentElement.querySelector(".form__input-error-message").textContent = message;
+}
+
+function clearInputError(inputElement) {
+  inputElement.classList.remove("form__input--error");
+  inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
+}
 
 
 
@@ -39,7 +56,9 @@ $(document).ready(function() {
   function callEndpoint(endpoint, data) {
     axios.post(endpoint, data)
       .then(response => {
+        let parsedData = JSON.parse(response.responseText);
         console.log(response.data);
+        console.log(parsedData.data);
       })
       .catch(error => {
         console.log(error?.response?.data);
@@ -72,15 +91,18 @@ $(document).ready(function() {
         axios.post('https://questelectronics.store/api/signup', data)
         .then(response => {
           console.log(response.data);
+          let parsedData = JSON.parse(response.responseText);
+          alert(parsedData.message);
+          console.log(parsedData.message);
         })
         .catch(error => {
-          console.log(error?.response?.data);
+          console.log(error?.response?.message);
         });
         alert(response.message);
       }
       else 
       {
-        console.log("Passwords dont match");
+        alert("Passwords dont match");
       }
     });
 
@@ -97,7 +119,11 @@ $(document).ready(function() {
       console.log(data);
       axios.post('https://questelectronics.store/api/signin', data)
       .then(response => {
-        console.log(response.data);
+        let parsedData = JSON.parse(response.responseText);
+        alert(parsedData);
+        console.log(parsedData.data);
+        const _Id = parsedData._Id;
+        localStorage.setItem("userId", userId);
       })
       .catch(error => {
         console.log(error?.response?.data);
