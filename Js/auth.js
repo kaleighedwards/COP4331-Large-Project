@@ -40,7 +40,7 @@ exports.authRouter = function (app, userCollection, reserveCollection, productCo
     
             if (user) {
                 res.status(200).json({ 
-                    id: user.UserID,
+                    _id: user._id,
                     message: 'Login successful',
                     PermLvl: user.PermLvl === 2 ? 'Customer' : "Employee"
                 });
