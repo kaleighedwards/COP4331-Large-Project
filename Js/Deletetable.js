@@ -1,3 +1,4 @@
+//cookie decoder
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -13,6 +14,7 @@ function getCookie(cname) {
     }
     return "";
   }
+  //function that takes the users reservations and builds a table
   function buildTable(data){
     var table = document.getElementById('myTable')
 
@@ -32,6 +34,7 @@ function getCookie(cname) {
   let data = {
     _Id: _Id
   }
+  //gets the users reservation table
 $(document).ready(function(){
     axios.post('https://questelectronics.store/api/reserve/:_Id', data)
     .then(response => {
@@ -43,7 +46,7 @@ $(document).ready(function(){
     });
     
     let ItemAmt = 1;
-
+    //removes an item
     $('table').on('click', '.btn-danger', function(){
         let name = $(this).closest('tr').children('td').eq(1).text();
         let data = {
@@ -62,4 +65,3 @@ $(document).ready(function(){
         });
     });
 });
-//API call needs: ItemID, UserID, ItemAmt
